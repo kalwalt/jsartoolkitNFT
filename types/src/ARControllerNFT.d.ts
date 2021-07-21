@@ -50,6 +50,7 @@ export default class ARControllerNFT {
         id: number;
         pose: Float64Array;
     };
+    getNFTData(): number;
     addEventListener(name: string, callback: object): void;
     removeEventListener(name: string, callback: object): void;
     dispatchEvent(event: {
@@ -75,9 +76,10 @@ export default class ARControllerNFT {
     getThresholdMode(): number;
     setThreshold(threshold: number): number;
     getThreshold(): number;
-    loadNFTMarker(urlOrData: string): Promise<{
+    loadNFTMarker(urlOrData: string): Promise<[{
         id: number;
-    }>;
+    }]>;
+    loadNFTMarkers(urlOrData: Array<string>): Promise<any>;
     setImageProcMode(mode: number): number;
     getImageProcMode(): number;
     private converter;

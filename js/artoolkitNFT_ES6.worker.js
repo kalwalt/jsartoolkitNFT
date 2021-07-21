@@ -29,13 +29,15 @@ function load (msg) {
       markerResult = { type: 'found', matrixGL_RH: JSON.stringify(ev.data.matrixGL_RH)}
     })
 
-    ar.loadNFTMarker(msg.marker).then(function (nft) {
-      ar.trackNFTMarkerId(nft.id)
-      console.log('loadNFTMarker -> ', nft.id)
-      console.log('nftMarker struct: ', nft)
+    ar.loadNFTMarker(msg.marker).then(function (id) {
+      ar.trackNFTMarkerId(id[0])
+      console.log('loadNFTMarker -> ', id[0])
       postMessage({ type: 'endLoading', end: true })
     }).catch(function (err) {
       console.log('Error in loading marker on Worker', err)
+    }).then( function() {
+      let nftData = ar.getNFTData()
+      console.log("nftMarker data: ", nftData)
     })
 
     postMessage({ type: 'loaded', proj: JSON.stringify(cameraMatrix) })
